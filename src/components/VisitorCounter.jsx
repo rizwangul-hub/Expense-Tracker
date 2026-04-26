@@ -8,33 +8,25 @@ const VisitorCounter = () => {
   useEffect(() => {
     const fetchVisitors = async () => {
       try {
-        const namespace = "expense-tracker-vercel";
-
-        // First, try to get the current count
-        const getResponse = await fetch(
-          `https://api.countapi.xyz/get/${namespace}`,
+        // Using free counter from hitwebcounter.com
+        const response = await fetch(
+          "https://www.hitwebcounter.com/counter/counter.php?page=expense-tracker-54&style=tl6&lngs=0-0&mode=pub&cid=000001&tm=0",
         );
 
-        if (getResponse.ok) {
-          const data = await getResponse.json();
-          setVisitorCount(data?.value || 0);
-
-          // Increment the counter for this visit
-          await fetch(`https://api.countapi.xyz/hit/${namespace}`, {
-            method: "GET",
-          });
-        } else {
-          // If no counter exists, create one with initial value
-          const createResponse = await fetch(
-            `https://api.countapi.xyz/create?namespace=${namespace}&enable_reset=0`,
-          );
-          if (createResponse.ok) {
-            const data = await createResponse.json();
-            setVisitorCount(data?.value || 1);
+        if (response.ok) {
+          const text = await response.text();
+          // Extract number from HTML response
+          const match = text.match(/(\d+)/);
+          if (match) {
+            setVisitorCount(parseInt(match[1]));
+          } else {
+            setVisitorCount(0);
           }
+        } else {
+          setVisitorCount(0);
         }
       } catch (error) {
-        console.log("Visitor counter unavailable");
+        // Fallback: show 0
         setVisitorCount(0);
       } finally {
         setLoading(false);
