@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Charts from "./Charts";
 import ThemeToggle from "./ThemeToggle";
+import VisitorCounter from "./VisitorCounter";
 import { FiClock, FiUser } from "react-icons/fi";
 
 const Dashboard = ({ user, onLogout }) => {
@@ -275,6 +276,8 @@ const Dashboard = ({ user, onLogout }) => {
                   })}
                 </span>
               </div>
+
+              <VisitorCounter />
 
               <ThemeToggle />
 
