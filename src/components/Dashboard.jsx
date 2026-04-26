@@ -774,6 +774,16 @@ const Dashboard = ({ user, onLogout }) => {
             </div>
           </div>
         </div>
+
+        {/* Footer */}
+        <footer className="mt-12 py-6 text-center border-t border-slate-200 dark:border-slate-800">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Developed by{" "}
+            <span className="font-semibold text-teal-600 dark:text-teal-400">
+              Rizwan
+            </span>
+          </p>
+        </footer>
       </main>
     </div>
   );
